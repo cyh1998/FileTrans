@@ -1,6 +1,7 @@
 # coding=utf-8
 
 import os
+import sys
 import json
 import urllib
 import random
@@ -65,7 +66,8 @@ def trans(user_path, appid, secretKey):
                     print("API调用失败, error_code : " + result['error_code'] + ", error_msg : " + result['error_msg'])
                     print("可前往官方API文档(http://api.fanyi.baidu.com/product/113)查看错误详情")
                     close_http(httpClient)
-                    exit()
+                    input("Press Enter to exit…")
+                    sys.exit()
                 
                 transResult = result['trans_result'][0]['dst']
                 transLog = file + ' >>> ' + transResult + file_ext
@@ -97,12 +99,13 @@ def main():
 
     if check_string(appid) or check_string(secretKey):
         print("请在config中正确配置百度API的appid和secretKey")
-        exit()
+        input("Press Enter to exit…")
+        sys.exit()
 
     while True:
         path = input("输入需要翻译的路径：")
         if path == 'q' or path == 'quit' or path == 'exit': 
-            exit()
+            sys.exit()
         if os.path.exists(path):
             trans(path, appid, secretKey)
 
