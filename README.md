@@ -4,7 +4,7 @@
 
 ## 使用 How
 
-**前提**  
+### 前提  
 
 项目需要访问百度翻译API，`APPID` 以及 `secretKey` 的获取方式如下：
 >1.使用您的百度账号登录[百度翻译开放平台](http://api.fanyi.baidu.com/)；  
@@ -22,13 +22,16 @@
 }
 ```
 
-**运行**
+### 运行  
+**1. 前往[releases](https://github.com/cyh1998/FileTrans/releases)下载 FileTrans 可执行文件**  
 
-下载源码直接运行 `FileTrans.py`  
+下载运行即可，若无法运行可使用下面的方法
+
+**2. 前往[releases](https://github.com/cyh1998/FileTrans/releases)下载源码 `FileTrans.py`**  
 ```
 python FileTrans.py
 ```
-拥有 `python3` 环境即可，无需额外库  
+拥有 `python3` 环境即可运行，无需额外库  
 
 
 ## 更新 Update  
