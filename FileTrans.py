@@ -9,7 +9,7 @@ import hashlib
 import http.client
 
 global_width = os.get_terminal_size().columns
-global_ext_type = ['.wav', '.mp3', '.wma', '.mov', '.aac', '.flac', '.ogg', '.aac', '.aiff']
+global_ext_type = {'.wav', '.mp3', '.wma', '.mov', '.aac', '.flac', '.ogg', '.aac', '.aiff'}
 
 # 输出分隔符
 def output_separator():
@@ -17,12 +17,12 @@ def output_separator():
 
 # 检查字符串
 def check_string(str):
-    return len(str) == 0 or str.isspace()
+    return not str.strip()
 
 # 重命名文件
 def rename_file(filePath, srcName, dstName):
-    src = filePath + '/' + srcName
-    dst = filePath + '/' + dstName
+    src = os.path.join(filePath, srcName)
+    dst = os.path.join(filePath, dstName)
     os.rename(src, dst)
 
 # 关闭Http连接
@@ -33,7 +33,7 @@ def close_http(httpClient):
 def trans(user_path, appid, secretKey):
     httpClient = None
     q = ""
-    myurl = ''
+    api_url = "/api/trans/vip/translate"
     fromLang = 'auto'
     toLang = 'zh'
     salt = random.randint(32768, 65536)
@@ -50,12 +50,11 @@ def trans(user_path, appid, secretKey):
             file_ext = os.path.splitext(file)[1]
             if file_ext.lower() in global_ext_type:
                 # 签名
-                myurl = '/api/trans/vip/translate'
                 q = file_name
                 sign = appid + q + str(salt) + secretKey
                 sign = hashlib.md5(sign.encode()).hexdigest()
-                myurl = myurl + '?appid=' + appid + '&q=' + urllib.parse.quote(q) + '&from=' + fromLang + '&to=' + toLang + '&salt=' + str(salt) + '&sign=' + sign
-                
+                myurl = f"{api_url}?appid={appid}&q={urllib.parse.quote(q)}&from={fromLang}&to={toLang}&salt={str(salt)}&sign={sign}"
+
                 # 调用百度API
                 httpClient.request('GET', myurl)
                 response = httpClient.getresponse()
