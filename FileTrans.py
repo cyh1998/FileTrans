@@ -10,6 +10,9 @@ import http.client
 
 global_width = os.get_terminal_size().columns
 global_ext_type = {'.wav', '.mp3', '.wma', '.mov', '.aac', '.flac', '.ogg', '.aac', '.aiff'}
+global_lang_type = {'zh','en','jp','th','ru','pt','de','it','el','nl','pl','cs','hu',
+                    'cht','kor','fra','spa','ara','bul','est','dan','fin','rom','slo','swe','vie'}
+global_to_lang = "zh"
 
 # 输出分隔符
 def output_separator():
@@ -35,7 +38,6 @@ def trans(user_path, appid, secretKey):
     q = ""
     api_url = "/api/trans/vip/translate"
     fromLang = 'auto'
-    toLang = 'zh'
     salt = random.randint(32768, 65536)
     count = 0
 
@@ -53,7 +55,7 @@ def trans(user_path, appid, secretKey):
                 q = file_name
                 sign = appid + q + str(salt) + secretKey
                 sign = hashlib.md5(sign.encode()).hexdigest()
-                myurl = f"{api_url}?appid={appid}&q={urllib.parse.quote(q)}&from={fromLang}&to={toLang}&salt={str(salt)}&sign={sign}"
+                myurl = f"{api_url}?appid={appid}&q={urllib.parse.quote(q)}&from={fromLang}&to={global_to_lang}&salt={str(salt)}&sign={sign}"
 
                 # 调用百度API
                 httpClient.request('GET', myurl)
@@ -101,12 +103,34 @@ def main():
         input("Press Enter to exit…")
         sys.exit()
 
+    print("原文件名语种类型自动识别，翻译结果默认为中文")
     while True:
-        path = input("输入需要翻译的路径：")
-        if path == 'q' or path == 'quit' or path == 'exit': 
+        print("开始文件翻译 >>> 1")
+        print("翻译语种设置 >>> 2")
+        order = input("输入数字选择:")
+
+        if order == 'q' or order == 'quit' or order == 'exit': 
             sys.exit()
-        if os.path.exists(path):
-            trans(path, appid, secretKey)
+
+        if '1' == order:
+            output_separator()
+            path = input("输入需要翻译的路径：")
+            if os.path.exists(path):
+                trans(path, appid, secretKey)
+            else:
+                print("路径不存在")
+        if '2' == order:
+            global global_to_lang
+            output_separator()
+            print("当前翻译语种: " + global_to_lang)
+            print("输入语种代码以设置, 如中文:zh; 英文:en; 日文:jp; 韩文:kor 等常见语种")
+            print("更多支持语种及其代码, 可参考官方文档(http://api.fanyi.baidu.com/product/113)")
+            lang = input("输入目标语种代码：")
+            if lang in global_lang_type:
+                global_to_lang = lang
+                print("设置成功")
+            else:
+                print("语种代码不存在")
 
         output_separator()
 
