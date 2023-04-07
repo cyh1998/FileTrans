@@ -12,7 +12,7 @@
 3.进行开发者认证；  
 4.开通通用翻译API服务：[开通链接](https://fanyi-api.baidu.com/choose)。   
 
-服务免费，放心使用。更多详情可访问[百度翻译开放平台官网](http://api.fanyi.baidu.com/product/11)  
+服务免费，放心使用。更多详情可访问 [百度翻译开放平台官网](http://api.fanyi.baidu.com/product/11)  
 
 将获得的 `APPID` 和 `secretKey` 填入 `config.json`
 ```
@@ -32,6 +32,20 @@
 python FileTrans.py
 ```
 拥有 `python3` 环境即可运行，无需额外库  
+
+### 支持语种
+| 名称        |    代码    | 名称        |    代码    | 名称         |    代码    |
+| ----------- | :--------: | ----------- | :--------: | ------------ | :--------: |
+| 中文        |     zh     | 希腊语      |     el     | 繁体中文     |     cht    |
+| 英语        |     en     | 荷兰语      |     nl     | 西班牙语     |     spa    |
+| 日语        |     jp     | 波兰语      |     pl     | 阿拉伯语     |     ara    |
+| 韩语        |     kor    | 丹麦语      |     dan    | 葡萄牙语     |     pt     |
+| 法语        |     fra    | 芬兰语      |     fin    | 意大利语     |     it     |
+| 泰语        |     th     | 捷克语      |     cs     | 匈牙利语     |     hu     |
+| 俄语        |     ru     | 瑞典语      |     swe    | 保加利亚语   |     bul    |
+| 德语        |     de     | 越南语      |     vie    | 爱沙尼亚语   |     est    |
+|             |            |             |            | 罗马尼亚语   |     rom    |
+|             |            |             |            | 斯洛文尼亚语 |     slo    |
 
 
 ## 更新 Update  
