@@ -47,14 +47,6 @@ python FileTrans.py
 |             |            |             |            | 罗马尼亚语   |     rom    |
 |             |            |             |            | 斯洛文尼亚语 |     slo    |
 
-
-## 更新 Update  
-
-- [ ] 合并文件名调用，减少API调用次数  
-- [x] 支持多语言翻译选择  
-- [ ] 支持文件翻译后导出指定路径
-
-
 ## 感谢 Thanks  
 
 [百度通用文本翻译API](http://api.fanyi.baidu.com/product/11)
